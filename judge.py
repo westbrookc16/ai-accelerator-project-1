@@ -127,6 +127,7 @@ def request_judgment(
             text = response.output_text.strip()
             result = JudgeResult.model_validate(json.loads(text))
             result.overall_failed = compute_overall_failed(result)
+            print(f"judgedd id {result.id}")
             return result
         except (RateLimitError, APIConnectionError, APITimeoutError, InternalServerError, APIStatusError) as exc:
             status_code = getattr(exc, "status_code", None)
